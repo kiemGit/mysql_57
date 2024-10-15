@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:5.7  # Use MySQL 5.7
+    container_name: mysql57
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: sap123ok
+      MYSQL_DATABASE: trs
+      MYSQL_USER: hakim
+      MYSQL_PASSWORD: sap123ok
+    ports:
+      - "3306:3306"  # Expose MySQL on port 3306
+    volumes:
+      - mysql_data:/var/lib/mysql  # Persist data
+      - .:/usr/src/app
+      - /usr/src/app/node_modules  # To prevent overwriting node_modules if installed in the container
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf
+volumes:
+  mysql_data:
+
+networks:
+  mynetwork:
+    driver: bridge
