@@ -8,3 +8,6 @@ docker-compose file
     container_name: mysql57
     restart: always
 ...
+
+# login to mysql versi raspi
+    + mysql -h 127.0.0.1 -P 3306 -u root -p
